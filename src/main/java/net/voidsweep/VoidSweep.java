@@ -5,7 +5,7 @@ import net.voidsweep.config.ConfigManager;
 import net.voidsweep.config.MessagesManager;
 import net.voidsweep.gui.StatsGUI;
 import net.voidsweep.listeners.GUIListener;
-import net.voidsweep.tasks.ScheduledCleanupTask;
+import net.voidsweep.tasks.ScheduledCleanupTasks;
 import net.voidsweep.utils.TPSMonitor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +14,7 @@ public final class VoidSweep extends JavaPlugin {
     private ConfigManager configManager;
     private MessagesManager messagesManager;
     private StatsGUI statsGUI;
-    private ScheduledCleanupTask cleanupTask;
+    private ScheduledCleanupTasks cleanupTask;
     private TPSMonitor tpsMonitor;
 
     @Override
@@ -25,7 +25,7 @@ public final class VoidSweep extends JavaPlugin {
         configManager = new ConfigManager(this);
         messagesManager = new MessagesManager(this);
         statsGUI = new StatsGUI(this);
-        cleanupTask = new ScheduledCleanupTask(this);
+        cleanupTask = new ScheduledCleanupTasks(this);
         tpsMonitor = new TPSMonitor(this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
@@ -45,7 +45,7 @@ public final class VoidSweep extends JavaPlugin {
         return statsGUI;
     }
 
-    public ScheduledCleanupTask getCleanupTask() {
+    public ScheduledCleanupTasks getCleanupTask() {
         return cleanupTask;
     }
 

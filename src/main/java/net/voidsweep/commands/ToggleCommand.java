@@ -15,7 +15,7 @@ public class ToggleCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!sender.hasPermission("voidsweep.toggle")) {
-            sender.sendMessage("§cYou do not have permission to change the auto-clean status.!");
+            sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.no-permission"));
             return true;
         }
 

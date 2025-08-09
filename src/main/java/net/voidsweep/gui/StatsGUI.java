@@ -11,6 +11,7 @@ import net.voidsweep.utils.TPSMonitor;
 import net.voidsweep.utils.ItemCounter;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class StatsGUI {
     private final VoidSweep plugin;
@@ -33,16 +34,18 @@ public class StatsGUI {
                         : Material.GRAY_DYE
         );
         ItemMeta toggleMeta = toggleBtn.getItemMeta();
-        toggleMeta.setDisplayName("§aSelf-cleaning: " +
-                (plugin.getConfigManager().isAutoCleanupEnabled() ? "§aEnabled" : "§cDisabled"));
-        toggleMeta.setLore(Arrays.asList(
-                "§7Click to change status",
-                "§7Interval: §f" + (plugin.getConfigManager().getCleanupIntervalTicks() / 20) + " сек"
-        ));
+        // Замість hardcoded текстів:
+        toggleMeta.setDisplayName(plugin.getMessagesManager()
+                .get("gui.buttons.toggle." + (enabled ? "enabled" : "disabled")));
+
+        toggleMeta.setLore(plugin.getMessagesManager()
+                .getStringList("gui.buttons.toggle.lore")
+                .stream()
+                .map(line -> line.replace("{interval}", String.valueOf(interval)))
+                .collect(Collectors.toList()));
         toggleBtn.setItemMeta(toggleMeta);
         gui.setItem(11, toggleBtn);
 
-        // Кнопка миттєвого очищення
         ItemStack cleanBtn = new ItemStack(Material.NETHERITE_HOE);
         ItemMeta cleanMeta = cleanBtn.getItemMeta();
         cleanMeta.setDisplayName("§6Instant cleansing");

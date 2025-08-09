@@ -16,12 +16,14 @@ public class ClearCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!sender.hasPermission("voidsweep.clear")) {
-            sender.sendMessage("§cYou don`t have permissions!");
+            sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.no-permission"));
             return true;
         }
 
-        plugin.getCleanupTask().cleanup();
-        sender.sendMessage("§aItems deleted!");
+        int count = plugin.getCleanupTask().cleanup();
+        sender.sendMessage(plugin.getMessagesManager()
+                .get("commands.clear-success")
+                .replace("{count}", String.valueOf(count)));
         return true;
     }
 }

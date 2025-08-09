@@ -15,6 +15,12 @@ public final class VoidSweep extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveResource("config.yml", false);
+        saveResource("messages.yml", false);
+
+        configManager = new ConfigManager(this);
+        messagesManager = new MessagesManager(this);
+
         tpsMonitor = new TPSMonitor(this);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
 

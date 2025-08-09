@@ -3,6 +3,8 @@ package net.voidsweep.config;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
+
 public class ConfigManager {
     private final JavaPlugin plugin;
     private FileConfiguration config;
@@ -43,5 +45,17 @@ public class ConfigManager {
 
     public boolean isItemsCleanupEnabled() {
         return config.getBoolean("items-cleanup-enabled", true);
+    }
+
+    public <T> T get(String path, Class<T> type) {
+        return type.cast(config.get(path));
+    }
+
+    public List<String> getProtectedItems() {
+        return config.getStringList("advanced.protected-items");
+    }
+
+    public int getCooldown() {
+        return config.getInt("advanced.cooldown", 60);
     }
 }

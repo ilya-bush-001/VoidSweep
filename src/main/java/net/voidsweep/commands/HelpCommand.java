@@ -18,13 +18,8 @@ public class HelpCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        List<String> helpMessages = Arrays.asList(
-                "&6&lVoidSweep &7- Help",
-                "&f/vs clear &7- Clean up the trash immediately",
-                "&f/vs reload &7- Reload plugin config",
-                "&f/vs on|off &7- Enable/disable auto-cleaning",
-                "&f/vs help &7- Show this list"
-        );
+        sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.help-header"));
+        sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.help-entries"));
 
         helpMessages.forEach(message ->
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message))

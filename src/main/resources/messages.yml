@@ -12,6 +12,7 @@ commands:
     - "&f/vs reload &7- Reload configuration"
     - "&f/vs on|off &7- Enable/disable auto-cleanup"
     - "&f/vs help &7- Help"
+  toggle-status: "&aAutomatic cleaning {status}&a!"
   usage:
     toggle: "&cUsage: &f/vs on|off"
     default: "&cUnknown command! Usage &f/vs help"

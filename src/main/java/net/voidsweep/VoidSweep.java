@@ -11,18 +11,18 @@ public final class VoidSweep extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getCommand("vs").setExecutor(new CommandHandler(this));
-
         configManager = new ConfigManager(this);
         messagesManager = new MessagesManager(this);
 
-        getLogger().info("VoidSweep is enabled!");
-        this.saveDefaultConfig();
+        this.getCommand("vs").setExecutor(new CommandHandler(this));
+    }
 
-        cleanupTask = new ScheduledCleanupTask(this);
-        if (isScheduledCleanupEnabled) {
-            cleanupTask.start();
-        }
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public MessagesManager getMessagesManager() {
+        return messagesManager;
     }
 
     @Override

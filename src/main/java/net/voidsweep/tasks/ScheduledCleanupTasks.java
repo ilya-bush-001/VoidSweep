@@ -34,7 +34,6 @@ public class ScheduledCleanupTasks {
     }
 
     private void cleanup() {
-        // Логіка очищення (реалізуємо пізніше)
         Bukkit.getWorlds().forEach(world -> {
             world.getEntities().forEach(entity -> {
                 if (entity instanceof Item) {

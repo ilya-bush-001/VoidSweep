@@ -20,24 +20,23 @@ public class CommandHandler implements CommandExecutor {
             if (sender instanceof Player) {
                 plugin.getStatsGUI().open((Player) sender);
                 return true;
-
-
-                switch (args[0].toLowerCase()) {
-                    case "clear":
-                        return new ClearCommand(plugin).onCommand(sender, cmd, label, args);
-                    case "reload":
-                        return new ReloadCommand(plugin).onCommand(sender, cmd, label, args);
-                    case "help":
-                        return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
-                    case "on":
-                    case "off":
-                        return new ToggleCommand(plugin).onCommand(sender, cmd, label, args);
-                    default:
-                        sender.sendMessage("§cUnknown command! Usage §f/vs help");
-                        return true;
-                }
             }
+            return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
         }
-        return false;
+
+        switch (args[0].toLowerCase()) {
+            case "clear":
+                return new ClearCommand(plugin).onCommand(sender, cmd, label, args);
+            case "reload":
+                return new ReloadCommand(plugin).onCommand(sender, cmd, label, args);
+            case "help":
+                return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
+            case "on":
+            case "off":
+                return new ToggleCommand(plugin).onCommand(sender, cmd, label, args);
+            default:
+                sender.sendMessage("§cUnknown command! Usage §f/vs help");
+                return true;
+        }
     }
 }

@@ -1,13 +1,17 @@
 package net.voidsweep.tasks;
 
-import net.md_5.bungee.api.chat.hover.content.Item;
 import net.voidsweep.VoidSweep;
 import net.voidsweep.utils.ItemCounter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Item;
 
 public class ScheduledCleanupTasks {
     private final VoidSweep plugin;
     private int taskId = -1;
+
+    public ScheduledCleanupTasks(VoidSweep plugin) {
+        this.plugin = plugin;
+    }
 
     private boolean shouldCleanupByItems() {
         if (!plugin.getConfigManager().isItemsCleanupEnabled()) {
@@ -17,21 +21,21 @@ public class ScheduledCleanupTasks {
         return currentItems >= plugin.getConfigManager().getMaxItemsThreshold();
     }
 
-    public void cleanup() {
+    public int cleanup() {
+        int count = 0;
         if (shouldCleanupByItems()) {
             Bukkit.getLogger().info("[VoidSweep] Emergency cleanup launched due to exceeding the item limit!");
         }
-        Bukkit.getWorlds().forEach(world -> {
-            world.getEntitiesByClass(Item.class).forEach(Item::remove);
-        });
-    }
 
-    public ScheduledCleanupTask(VoidSweep plugin) {
-        this.plugin = plugin;
-    }
-
-    public ScheduledCleanupTasks(VoidSweep plugin) {
-        this.plugin = plugin;
+        for (org.bukkit.World world : Bukkit.getWorlds()) {
+            for (org.bukkit.entity.Entity entity : world.getEntities()) {
+                if (entity instanceof Item) {
+                    entity.remove();
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public void start() {
@@ -49,15 +53,5 @@ public class ScheduledCleanupTasks {
         if (taskId == -1) return;
         Bukkit.getScheduler().cancelTask(taskId);
         taskId = -1;
-    }
-
-    private void cleanup() {
-        Bukkit.getWorlds().forEach(world -> {
-            world.getEntities().forEach(entity -> {
-                if (entity instanceof Item) {
-                    entity.remove();
-                }
-            });
-        });
     }
 }

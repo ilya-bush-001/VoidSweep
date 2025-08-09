@@ -1,7 +1,6 @@
 package net.voidsweep.commands;
 
 import net.voidsweep.VoidSweep;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,12 +18,8 @@ public class HelpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.help-header"));
-        sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.help-entries"));
-
-        helpMessages.forEach(message ->
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
-        );
-
+        List<String> helpMessages = plugin.getMessagesManager().getStringList("commands.help-entries");
+        helpMessages.forEach(message -> sender.sendMessage(message));
         return true;
     }
 }

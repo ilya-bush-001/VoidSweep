@@ -1,14 +1,14 @@
 package net.voidsweep.gui;
 
+import net.voidsweep.VoidSweep;
+import net.voidsweep.utils.ItemCounter;
+import net.voidsweep.utils.TPSMonitor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import net.voidsweep.VoidSweep;
-import net.voidsweep.utils.TPSMonitor;
-import net.voidsweep.utils.ItemCounter;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -27,14 +27,13 @@ public class StatsGUI {
                 "§8VoidSweep Control Panel"
         );
 
-        // Кнопка статусу автоочищення
+        boolean enabled = plugin.getConfigManager().isAutoCleanupEnabled();
+        long interval = plugin.getConfigManager().getCleanupIntervalTicks() / 20;
+
         ItemStack toggleBtn = new ItemStack(
-                plugin.getConfigManager().isAutoCleanupEnabled()
-                        ? Material.LIME_DYE
-                        : Material.GRAY_DYE
+                enabled ? Material.LIME_DYE : Material.GRAY_DYE
         );
         ItemMeta toggleMeta = toggleBtn.getItemMeta();
-        // Замість hardcoded текстів:
         toggleMeta.setDisplayName(plugin.getMessagesManager()
                 .get("gui.buttons.toggle." + (enabled ? "enabled" : "disabled")));
 
@@ -56,12 +55,11 @@ public class StatsGUI {
         cleanBtn.setItemMeta(cleanMeta);
         gui.setItem(13, cleanBtn);
 
-        // Інформаційна панель
         ItemStack infoBtn = new ItemStack(Material.BOOK);
         ItemMeta infoMeta = infoBtn.getItemMeta();
         infoMeta.setDisplayName("§bServer statistics");
         infoMeta.setLore(Arrays.asList(
-                "§7TPS: §f" + String.format("%.2f", TPSMonitor.getLastTPS()),
+                "§7TPS: §f" + String.format("%.2f", plugin.getTPSMonitor().getLastTPS()),
                 "§7Chunks: §f" + Bukkit.getWorlds().stream().mapToInt(w -> w.getLoadedChunks().length).sum(),
                 "§7Entities: §f" + Bukkit.getWorlds().stream().mapToInt(w -> w.getEntities().size()).sum()
         ));

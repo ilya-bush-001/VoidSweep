@@ -58,4 +58,8 @@ public class ConfigManager {
     public int getCooldown() {
         return config.getInt("advanced.cooldown", 60);
     }
+
+    public long getCleanupIntervalTicks() {
+        return config.getLong("cleanup-interval-ticks", 6000L);
+    }
 }

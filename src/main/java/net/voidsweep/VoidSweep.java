@@ -5,13 +5,17 @@ import net.voidsweep.config.ConfigManager;
 import net.voidsweep.config.MessagesManager;
 import net.voidsweep.gui.StatsGUI;
 import net.voidsweep.listeners.GUIListener;
+import net.voidsweep.tasks.ScheduledCleanupTask;
 import net.voidsweep.utils.TPSMonitor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class VoidSweep extends JavaPlugin {
+    private ConfigManager configManager;
+    private MessagesManager messagesManager;
+    private StatsGUI statsGUI;
     private ScheduledCleanupTask cleanupTask;
-    private boolean isScheduledCleanupEnabled = true;
+    private TPSMonitor tpsMonitor;
 
     @Override
     public void onEnable() {
@@ -20,22 +24,13 @@ public final class VoidSweep extends JavaPlugin {
 
         configManager = new ConfigManager(this);
         messagesManager = new MessagesManager(this);
-
-        tpsMonitor = new TPSMonitor(this);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
-
-        configManager = new ConfigManager(this);
-        messagesManager = new MessagesManager(this);
-
-        this.getCommand("vs").setExecutor(new CommandHandler(this));
-
         statsGUI = new StatsGUI(this);
+        cleanupTask = new ScheduledCleanupTask(this);
+        tpsMonitor = new TPSMonitor(this);
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
         getCommand("vs").setExecutor(new CommandHandler(this));
         Bukkit.getPluginManager().registerEvents(new GUIListener(this), this);
-
-        public StatsGUI getStatsGUI() {
-            return statsGUI;
-        }
     }
 
     public ConfigManager getConfigManager() {
@@ -46,8 +41,20 @@ public final class VoidSweep extends JavaPlugin {
         return messagesManager;
     }
 
+    public StatsGUI getStatsGUI() {
+        return statsGUI;
+    }
+
+    public ScheduledCleanupTask getCleanupTask() {
+        return cleanupTask;
+    }
+
     @Override
     public void onDisable() {
         getLogger().info("VoidSweep is disabled!");
+    }
+
+    public TPSMonitor getTPSMonitor() {
+        return tpsMonitor;
     }
 }

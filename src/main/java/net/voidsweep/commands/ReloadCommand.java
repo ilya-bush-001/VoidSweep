@@ -15,14 +15,14 @@ public class ReloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!sender.hasPermission("voidsweep.reload")) {
-            sender.sendMessage("§cYou do not have permission to reboot the configuration.!");
+            sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.no-permission"));
             return true;
         }
 
         plugin.reloadConfig();
         plugin.getMessagesManager().reload();
 
-        sender.sendMessage("§aPlugin configuration reloaded!");
+        sender.sendMessage(plugin.getMessagesManager().getWithPrefix("commands.reload-success"));
         return true;
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandHandler implements CommandExecutor {
     private final VoidSweep plugin;
@@ -14,26 +15,29 @@ public class CommandHandler implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player) {
                 plugin.getStatsGUI().open((Player) sender);
                 return true;
 
 
-        switch (args[0].toLowerCase()) {
-            case "clear":
-                return new ClearCommand(plugin).onCommand(sender, cmd, label, args);
-            case "reload":
-                return new ReloadCommand(plugin).onCommand(sender, cmd, label, args);
-            case "help":
-                return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
-            case "on":
-            case "off":
-                return new ToggleCommand(plugin).onCommand(sender, cmd, label, args);
-            default:
-                sender.sendMessage("§cUnknown command! Usage §f/vs help");
-                return true;
+                switch (args[0].toLowerCase()) {
+                    case "clear":
+                        return new ClearCommand(plugin).onCommand(sender, cmd, label, args);
+                    case "reload":
+                        return new ReloadCommand(plugin).onCommand(sender, cmd, label, args);
+                    case "help":
+                        return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
+                    case "on":
+                    case "off":
+                        return new ToggleCommand(plugin).onCommand(sender, cmd, label, args);
+                    default:
+                        sender.sendMessage("§cUnknown command! Usage §f/vs help");
+                        return true;
+                }
+            }
         }
+        return false;
     }
 }

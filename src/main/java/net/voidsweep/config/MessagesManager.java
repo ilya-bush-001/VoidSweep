@@ -1,5 +1,6 @@
 package net.voidsweep.config;
 
+import net.voidsweep.utils.ColorParser;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
@@ -22,8 +23,8 @@ public class MessagesManager {
     }
 
     public String get(String path) {
-        return messages.getString(path, "&cNo messages found: " + path)
-                .replace("&", "§");
+        String message = config.getString(path, "&cMissing message: " + path);
+        return ColorParser.parse(message.replace("&", "§"));
     }
 
     public String getWithPrefix(String path) {

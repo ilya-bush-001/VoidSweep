@@ -12,6 +12,10 @@ commands:
     - "&f/vs reload &7- Reload configuration"
     - "&f/vs on|off &7- Enable/disable auto-cleanup"
     - "&f/vs help &7- Help"
+  usage:
+    toggle: "&cUsage: &f/vs on|off"
+    default: "&cUnknown command! Usage &f/vs help"
+  cleanup-started: "&aCleaning started!"
 errors:
   low-tps: "&eEmergency cleanup triggered due to low TPS: {tps}"
   too-many-items: "&eEmergency cleanup triggered due to excessive items: {count}/{max}"
@@ -35,3 +39,14 @@ gui:
         - "&7TPS: &f{tps}"
         - "&7Chunks: &f{chunks}"
         - "&7Entities: &f{entities}"
+  instant-cleansing:
+    name: "&6Instant cleansing"
+    lore:
+      - "&7Click to launch"
+      - "&7Subjects: &f{count}"
+  server-stats:
+    name: "&bServer statistics"
+    lore:
+      - "&7TPS: &f{tps}"
+      - "&7Chunks: &f{chunks}"
+      - "&7Entities: &f{entities}"

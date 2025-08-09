@@ -1,6 +1,7 @@
 package net.voidsweep;
 
 import net.voidsweep.commands.CommandHandler;
+import net.voidsweep.commands.VoidSweepTabCompleter;
 import net.voidsweep.config.ConfigManager;
 import net.voidsweep.config.MessagesManager;
 import net.voidsweep.gui.StatsGUI;
@@ -36,6 +37,7 @@ public final class VoidSweep extends JavaPlugin {
         PluginCommand command = getCommand("vs");
         if (command != null) {
             command.setExecutor(new CommandHandler(this));
+            command.setTabCompleter(new VoidSweepTabCompleter());
         } else {
             getLogger().severe("Failed to register command 'vs'! Check plugin.yml!");
             Bukkit.getPluginManager().disablePlugin(this);

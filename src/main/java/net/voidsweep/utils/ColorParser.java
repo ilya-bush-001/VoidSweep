@@ -1,19 +1,16 @@
 package net.voidsweep.utils;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.ChatColor;
 
 public class ColorParser {
-    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
-    private static final LegacyComponentSerializer LEGACY_SERIALIZER =
-            LegacyComponentSerializer.builder()
-                    .hexColors()
-                    .useUnusualXRepeatedCharacterHexFormat()
-                    .build();
-
     public static String parse(String text) {
-        Component component = MINI_MESSAGE.deserialize(text);
-        return LEGACY_SERIALIZER.serialize(component);
+        if (text == null) return "";
+
+        text = parseHexColors(text);
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    private static String parseHexColors(String text) {
+        return text.replaceAll("(?i)&#([a-f0-9]{6})", "§x§$1");
     }
 }

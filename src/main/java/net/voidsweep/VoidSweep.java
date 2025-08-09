@@ -37,42 +37,26 @@ public final class VoidSweep extends JavaPlugin {
         if (command != null) {
             command.setExecutor(new CommandHandler(this));
         } else {
-            getLogger().severe("Failed to register command 'vs'. Check plugin.yml!");
+            getLogger().severe("Failed to register command 'vs'! Check plugin.yml!");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
-        // Реєстрація слухача подій
         Bukkit.getPluginManager().registerEvents(new GUIListener(this), this);
 
-        // Запуск тасків
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
 
         getLogger().info("VoidSweep enabled successfully!");
     }
 
-    public ConfigManager getConfigManager() {
-        return configManager;
-    }
-
-    public MessagesManager getMessagesManager() {
-        return messagesManager;
-    }
-
-    public StatsGUI getStatsGUI() {
-        return statsGUI;
-    }
-
-    public ScheduledCleanupTasks getCleanupTask() {
-        return cleanupTask;
-    }
+    public ConfigManager getConfigManager() { return configManager; }
+    public MessagesManager getMessagesManager() { return messagesManager; }
+    public StatsGUI getStatsGUI() { return statsGUI; }
+    public ScheduledCleanupTasks getCleanupTask() { return cleanupTask; }
+    public TPSMonitor getTPSMonitor() { return tpsMonitor; }
 
     @Override
     public void onDisable() {
-        getLogger().info("VoidSweep is disabled!");
-    }
-
-    public TPSMonitor getTPSMonitor() {
-        return tpsMonitor;
+        getLogger().info("VoidSweep disabled!");
     }
 }

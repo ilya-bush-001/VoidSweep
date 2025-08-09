@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 
 public class ScheduledCleanupTasks {
     private final VoidSweep plugin;
-    private int taskId;
+    private int taskId = -1;
 
     public ScheduledCleanupTask(VoidSweep plugin) {
         this.plugin = plugin;
@@ -17,13 +17,20 @@ public class ScheduledCleanupTasks {
     }
 
     public void start() {
-        long cleanupInterval = plugin.getConfig().getLong("cleanup-interval-ticks", 6000L);
+        if (taskId != -1) return;
+        long interval = plugin.getConfigManager().getCleanupIntervalTicks();
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(
                 plugin,
                 this::cleanup,
-                cleanupInterval,
-                cleanupInterval
+                interval,
+                interval
         );
+    }
+
+    public void stop() {
+        if (taskId == -1) return;
+        Bukkit.getScheduler().cancelTask(taskId);
+        taskId = -1;
     }
 
     private void cleanup() {

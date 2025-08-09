@@ -21,7 +21,7 @@ errors:
   low-tps: "&eEmergency cleanup triggered due to low TPS: {tps}"
   too-many-items: "&eEmergency cleanup triggered due to excessive items: {count}/{max}"
 gui:
-  title: "&8VoidSweep Control Panel"
+  control-panel-title: "&8VoidSweep Control Panel"
   buttons:
     toggle:
       enabled: "&aAuto-cleanup: &2Enabled"

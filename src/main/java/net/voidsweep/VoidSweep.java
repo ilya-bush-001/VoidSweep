@@ -1,5 +1,8 @@
 package net.voidsweep;
 
+import net.voidsweep.commands.CommandHandler;
+import net.voidsweep.config.ConfigManager;
+import net.voidsweep.config.MessagesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class VoidSweep extends JavaPlugin {
@@ -9,6 +12,9 @@ public final class VoidSweep extends JavaPlugin {
     @Override
     public void onEnable() {
         this.getCommand("vs").setExecutor(new CommandHandler(this));
+
+        configManager = new ConfigManager(this);
+        messagesManager = new MessagesManager(this);
 
         getLogger().info("VoidSweep is enabled!");
         this.saveDefaultConfig();

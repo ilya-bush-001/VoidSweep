@@ -15,7 +15,6 @@ public class CommandHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            // Якщо команда без аргументів (/vs) - показуємо help
             return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
         }
 

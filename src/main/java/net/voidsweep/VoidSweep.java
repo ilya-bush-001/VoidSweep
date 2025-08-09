@@ -7,9 +7,6 @@ public final class VoidSweep extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("VoidSweep is enabled!");
-        setupClearTimer();
-        registerCommands();
-
     }
 
     @Override

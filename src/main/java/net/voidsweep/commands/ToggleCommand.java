@@ -33,7 +33,9 @@ public class ToggleCommand implements CommandExecutor {
             plugin.getCleanupTask().stop();
         }
 
-        sender.sendMessage("§aAutomatic cleaning " + (newState ? "enabled" : "disabled") + "!");
-        return true;
+        sender.sendMessage(plugin.getMessagesManager()
+                .get("commands.toggle-status")
+                .replace("{status}", newState ? "enabled" : "disabled"));
+        return newState;
     }
 }

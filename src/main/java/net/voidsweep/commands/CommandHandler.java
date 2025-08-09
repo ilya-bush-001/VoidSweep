@@ -35,7 +35,7 @@ public class CommandHandler implements CommandExecutor {
             case "off":
                 return new ToggleCommand(plugin).onCommand(sender, cmd, label, args);
             default:
-                sender.sendMessage("§cUnknown command! Usage §f/vs help");
+                sender.sendMessage(plugin.getMessagesManager().get("commands.usage.unknown"));
                 return true;
         }
     }

@@ -21,11 +21,8 @@ public class StatsGUI {
     }
 
     public void open(Player player) {
-        Inventory gui = Bukkit.createInventory(
-                null,
-                27,
-                "§8VoidSweep Control Panel"
-        );
+        String title = plugin.getMessagesManager().get("gui.control-panel-title");
+        Inventory gui = Bukkit.createInventory(null, 27, title);
 
         boolean enabled = plugin.getConfigManager().isAutoCleanupEnabled();
         long interval = plugin.getConfigManager().getCleanupIntervalTicks() / 20;
@@ -34,8 +31,7 @@ public class StatsGUI {
                 enabled ? Material.LIME_DYE : Material.GRAY_DYE
         );
         ItemMeta toggleMeta = toggleBtn.getItemMeta();
-        toggleMeta.setDisplayName(plugin.getMessagesManager()
-                .get("gui.buttons.toggle." + (enabled ? "enabled" : "disabled")));
+        toggleMeta.setDisplayName(plugin.getMessagesManager().get("gui.buttons.toggle." + (enabled ? "enabled" : "disabled")));
 
         toggleMeta.setLore(plugin.getMessagesManager()
                 .getStringList("gui.buttons.toggle.lore")

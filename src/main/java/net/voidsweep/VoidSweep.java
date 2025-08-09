@@ -34,10 +34,10 @@ public final class VoidSweep extends JavaPlugin {
         cleanupTask = new ScheduledCleanupTasks(this);
         tpsMonitor = new TPSMonitor(this);
 
-        PluginCommand command = getCommand("vs");
-        if (command != null) {
-            command.setExecutor(new CommandHandler(this));
-            command.setTabCompleter(new VoidSweepTabCompleter());
+        PluginCommand vsCommand = getCommand("vs");
+        if (vsCommand != null) {
+            vsCommand.setExecutor(new CommandHandler(this));
+            vsCommand.setTabCompleter(new VoidSweepTabCompleter());
         } else {
             getLogger().severe("Failed to register command 'vs'! Check plugin.yml!");
             Bukkit.getPluginManager().disablePlugin(this);

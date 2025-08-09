@@ -4,28 +4,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class VoidSweepTabCompleter implements TabCompleter {
-    private static final List<String> MAIN_COMMANDS = List.of("clear", "reload", "help", "on", "off");
+    private static final List<String> SUBCOMMANDS = Arrays.asList("clear", "reload", "help", "on", "off");
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-                                                @NotNull String alias, @NotNull String[] args) {
-        List<String> completions = new ArrayList<>();
-
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd,
+                                      @NotNull String alias, String[] args) {
         if (args.length == 1) {
-            // First argument - main commands
-            for (String cmd : MAIN_COMMANDS) {
-                if (cmd.startsWith(args[0].toLowerCase())) {
-                    completions.add(cmd);
+            List<String> completions = new ArrayList<>();
+            for (String sub : SUBCOMMANDS) {
+                if (sub.startsWith(args[0].toLowerCase())) {
+                    completions.add(sub);
                 }
             }
+            return completions;
         }
-
-        return completions.isEmpty() ? null : completions;
+        return Collections.emptyList();
     }
 }

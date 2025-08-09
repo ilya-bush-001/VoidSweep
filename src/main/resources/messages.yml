@@ -1,0 +1,37 @@
+# messages.yml
+prefix: "&8[&bVoidSweep&8] "
+commands:
+  no-permission: "&cYou do not have permission!"
+  reload-success: "&aConfiguration reloaded!"
+  toggle-on: "&aAuto-cleanup enabled!"
+  toggle-off: "&cAuto-cleanup disabled!"
+  clear-success: "&aRemoved {count} items!"
+  help-header: "&6===== VoidSweep Help ====="
+  help-entries:
+    - "&f/vs clear &7- Instant cleanup"
+    - "&f/vs reload &7- Reload configuration"
+    - "&f/vs on|off &7- Enable/disable auto-cleanup"
+    - "&f/vs help &7- Help"
+errors:
+  low-tps: "&eEmergency cleanup triggered due to low TPS: {tps}"
+  too-many-items: "&eEmergency cleanup triggered due to excessive items: {count}/{max}"
+gui:
+  title: "&8VoidSweep Control Panel"
+  buttons:
+    toggle:
+      enabled: "&aAuto-cleanup: &2Enabled"
+      disabled: "&aAuto-cleanup: &4Disabled"
+      lore:
+        - "&7Click to toggle state"
+        - "&7Interval: &f{interval} sec"
+    cleanup:
+      name: "&6Instant Cleanup"
+      lore:
+        - "&7Click to run"
+        - "&7Items: &f{count}"
+    info:
+      name: "&bServer Statistics"
+      lore:
+        - "&7TPS: &f{tps}"
+        - "&7Chunks: &f{chunks}"
+        - "&7Entities: &f{entities}"

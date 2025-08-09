@@ -3,6 +3,8 @@ package net.voidsweep;
 import net.voidsweep.commands.CommandHandler;
 import net.voidsweep.config.ConfigManager;
 import net.voidsweep.config.MessagesManager;
+import net.voidsweep.gui.StatsGUI;
+import net.voidsweep.listeners.GUIListener;
 import net.voidsweep.utils.TPSMonitor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +22,14 @@ public final class VoidSweep extends JavaPlugin {
         messagesManager = new MessagesManager(this);
 
         this.getCommand("vs").setExecutor(new CommandHandler(this));
+
+        statsGUI = new StatsGUI(this);
+        getCommand("vs").setExecutor(new CommandHandler(this));
+        Bukkit.getPluginManager().registerEvents(new GUIListener(this), this);
+
+        public StatsGUI getStatsGUI() {
+            return statsGUI;
+        }
     }
 
     public ConfigManager getConfigManager() {

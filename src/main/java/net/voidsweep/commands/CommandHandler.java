@@ -4,6 +4,7 @@ import net.voidsweep.VoidSweep;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CommandHandler implements CommandExecutor {
     private final VoidSweep plugin;
@@ -15,8 +16,10 @@ public class CommandHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            return new HelpCommand(plugin).onCommand(sender, cmd, label, args);
-        }
+            if (sender instanceof Player) {
+                plugin.getStatsGUI().open((Player) sender);
+                return true;
+
 
         switch (args[0].toLowerCase()) {
             case "clear":

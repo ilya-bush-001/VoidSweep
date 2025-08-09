@@ -13,14 +13,12 @@ public class TPSMonitor implements Runnable {
 
     @Override
     public void run() {
-        // Отримуємо поточний TPS (1.16.5 Paper API)
         lastTPS = Bukkit.getServer().getTPS()[0];
 
-        // Якщо TPS нижче порогу - запускаємо очищення
         if (plugin.getConfigManager().isLowTpsCleanupEnabled()
                 && lastTPS < plugin.getConfigManager().getLowTpsThreshold()) {
             plugin.getCleanupTask().cleanup();
-            Bukkit.getLogger().warning("[VoidSweep] Автоматичне очищення через низький TPS: " + lastTPS);
+            Bukkit.getLogger().warning("[VoidSweep] Automatic cleaning due to low TPS: " + lastTPS);
         }
     }
 

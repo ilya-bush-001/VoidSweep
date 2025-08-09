@@ -18,7 +18,8 @@ repositories {
 }
 
 dependencies {
-compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
+    compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
+    compileOnly 'com.github.cryptomorin:XSeries:9.4.0'
 }
 
 def targetJavaVersion = 8

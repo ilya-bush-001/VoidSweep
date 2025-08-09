@@ -15,7 +15,7 @@ public class ConfigManager {
     public void reload() {
         plugin.reloadConfig();
         config = plugin.getConfig();
-        config.addDefault("auto-cleanup-enabled", true); // Додаємо дефолтне значення
+        config.addDefault("auto-cleanup-enabled", true);
         config.options().copyDefaults(true);
         plugin.saveConfig();
     }
@@ -35,5 +35,13 @@ public class ConfigManager {
 
     public boolean isLowTpsCleanupEnabled() {
         return config.getBoolean("low-tps-cleanup-enabled", true);
+    }
+
+    public int getMaxItemsThreshold() {
+        return config.getInt("max-items-threshold", 500);
+    }
+
+    public boolean isItemsCleanupEnabled() {
+        return config.getBoolean("items-cleanup-enabled", true);
     }
 }

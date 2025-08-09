@@ -8,6 +8,7 @@ import net.voidsweep.listeners.GUIListener;
 import net.voidsweep.tasks.ScheduledCleanupTasks;
 import net.voidsweep.utils.TPSMonitor;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class VoidSweep extends JavaPlugin {
@@ -19,6 +20,10 @@ public final class VoidSweep extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+
         saveResource("config.yml", false);
         saveResource("messages.yml", false);
 
@@ -28,9 +33,22 @@ public final class VoidSweep extends JavaPlugin {
         cleanupTask = new ScheduledCleanupTasks(this);
         tpsMonitor = new TPSMonitor(this);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
-        getCommand("vs").setExecutor(new CommandHandler(this));
+        PluginCommand command = getCommand("vs");
+        if (command != null) {
+            command.setExecutor(new CommandHandler(this));
+        } else {
+            getLogger().severe("Failed to register command 'vs'. Check plugin.yml!");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        // Реєстрація слухача подій
         Bukkit.getPluginManager().registerEvents(new GUIListener(this), this);
+
+        // Запуск тасків
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, tpsMonitor, 100L, 100L);
+
+        getLogger().info("VoidSweep enabled successfully!");
     }
 
     public ConfigManager getConfigManager() {

@@ -4,3 +4,9 @@ main: net.voidsweep.VoidSweep
 api-version: '1.16'
 authors: [Ilya Bush]
 description: A plugin for sweeping trash from your server into the abyss!
+commands:
+  vs:
+    description: Main command for VoidSweep plugin
+    usage: /vs [clear|reload|help|on|off]
+    permission: voidsweep.use
+    permission-message: You don't have permission to use this command!

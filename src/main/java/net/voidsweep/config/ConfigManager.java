@@ -28,4 +28,12 @@ public class ConfigManager {
         config.set("auto-cleanup-enabled", value);
         plugin.saveConfig();
     }
+
+    public double getLowTpsThreshold() {
+        return config.getDouble("low-tps-threshold", 15.0);
+    }
+
+    public boolean isLowTpsCleanupEnabled() {
+        return config.getBoolean("low-tps-cleanup-enabled", true);
+    }
 }

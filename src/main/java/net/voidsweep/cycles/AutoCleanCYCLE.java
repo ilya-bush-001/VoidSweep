@@ -1,7 +1,9 @@
 package net.voidsweep.cycles;
 
+import net.voidsweep.whitelist.ItemWHITELIST;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -18,21 +20,28 @@ public class AutoCleanCYCLE {
         return autoCleanEnabled;
     }
 
-
     public int autoCleanCYCLE(boolean broadcast) {
         if (!autoCleanEnabled) return 0;
         int removed = 0;
+
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
                 if (entity instanceof Item) {
-                    entity.remove();
-                    removed++;
+                    Item item = (Item) entity;
+                    Material type = item.getItemStack().getType();
+
+                    if (!whitelistManager.getWhitelist().contains(type)) {
+                        item.remove();
+                        removed++;
+                    }
                 }
             }
         }
+
         if (broadcast) {
             Bukkit.broadcastMessage(ChatColor.YELLOW + String.valueOf(removed) + ChatColor.GREEN + " items have been cleaned.");
         }
+
         return removed;
     }
 
@@ -50,5 +59,15 @@ public class AutoCleanCYCLE {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             int removed = autoCleanCYCLE(true);
         }, 2400L);
+    }
+
+    private ItemWHITELIST whitelistManager;
+
+    public AutoCleanCYCLE(ItemWHITELIST whitelistManager) {
+        this.whitelistManager = whitelistManager;
+    }
+
+    public void reloadWhitelist() {
+        whitelistManager.loadWhitelist();
     }
 }

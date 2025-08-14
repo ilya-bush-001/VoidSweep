@@ -50,6 +50,7 @@ public class CommandHANDLER implements CommandExecutor {
                     return true;
                 }
                 plugin.reloadConfig();
+                cleaner.reloadWhitelist();
                 player.sendMessage(ChatColor.GREEN + "The plugin has been successfully reloaded!");
                 break;
 

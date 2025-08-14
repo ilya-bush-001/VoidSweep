@@ -7,3 +7,4 @@ description: A flexible plugin to keep your server clean.
 commands:
   vs:
     usage: /vs clear
+    permission: voidsweep.command.clear

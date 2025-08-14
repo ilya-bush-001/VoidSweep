@@ -18,6 +18,13 @@ public class AutoCleanCOMMAND implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player) {
+            Player player = (Player) sender;
+
+            if(!player.hasPermission("voidsweep.command.clear")) {
+                player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
+                return true;
+            }
+
             int removed = cleaner.autoCleanCYCLE();
             sender.sendMessage(ChatColor.GREEN + String.valueOf(removed) + " items were cleaned manually.");
         } else {

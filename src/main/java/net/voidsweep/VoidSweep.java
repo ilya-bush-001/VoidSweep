@@ -15,6 +15,7 @@ public final class VoidSweep extends JavaPlugin {
         AutoCleanCYCLE cleaner = new AutoCleanCYCLE();
         Objects.requireNonNull(getCommand("vs")).setExecutor(new CommandHANDLER(cleaner, this));
 
+        getServer().getScheduler().runTaskTimer(this, () -> cleaner.warnings(this), 0L, 12000L);
         getServer().getScheduler().runTaskTimer(this, () -> cleaner.autoCleanCYCLE(true), 200L, 12000L);
 
         reloadConfig();

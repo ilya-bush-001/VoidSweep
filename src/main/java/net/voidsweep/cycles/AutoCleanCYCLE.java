@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class AutoCleanCYCLE {
     public int autoCleanCYCLE(boolean broadcast) {
@@ -21,5 +22,21 @@ public class AutoCleanCYCLE {
             Bukkit.broadcastMessage(ChatColor.YELLOW + String.valueOf(removed) + ChatColor.GREEN + " items have been cleaned.");
         }
         return removed;
+    }
+
+    public void warnings(JavaPlugin plugin) {
+        int[] seconds = {120, 10, 5, 4, 3, 2, 1};
+
+        for (int sec : seconds) {
+            long delay = (120 - sec) * 20L;
+
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + "⚠️ Cleaning in " + sec + " second" + (sec == 1 ? "!" : "s!"));
+            }, delay);
+        }
+
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            int removed = autoCleanCYCLE(true);
+        }, 2400L);
     }
 }

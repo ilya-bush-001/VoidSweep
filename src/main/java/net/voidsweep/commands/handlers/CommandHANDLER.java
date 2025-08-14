@@ -53,8 +53,32 @@ public class CommandHANDLER implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + "The plugin has been successfully reloaded!");
                 break;
 
+            case "on":
+                if (!player.hasPermission("voidsweep.command.autoclean.on")) {
+                    player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
+                    return true;
+                }
+
+                if (args[0].equalsIgnoreCase("on")) {
+                    cleaner.setAutoCleanEnabled(true);
+                    sender.sendMessage(ChatColor.GREEN + "Auto-cleaning enabled.");
+                    return true;
+                }
+
+            case "off":
+                if (!player.hasPermission("voidsweep.command.autoclean.off")) {
+                    player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
+                    return true;
+                }
+
+                if (args[0].equalsIgnoreCase("off")) {
+                    cleaner.setAutoCleanEnabled(false);
+                    sender.sendMessage(ChatColor.RED + "❌ Auto-cleaning disabled.");
+                    return true;
+                }
+
             default:
-                player.sendMessage(ChatColor.RED + "Unknown subcommand.");
+                player.sendMessage(ChatColor.RED + "Unknown subcommand. Usage: /vs <clear|reload|on|off>.");
                 break;
         }
         return true;

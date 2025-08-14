@@ -8,7 +8,19 @@ import org.bukkit.entity.Item;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AutoCleanCYCLE {
+    private boolean autoCleanEnabled = true;
+
+    public void setAutoCleanEnabled(boolean enabled) {
+        this.autoCleanEnabled = enabled;
+    }
+
+    public boolean isAutoCleanEnabled() {
+        return autoCleanEnabled;
+    }
+
+
     public int autoCleanCYCLE(boolean broadcast) {
+        if (!autoCleanEnabled) return 0;
         int removed = 0;
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {

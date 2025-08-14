@@ -12,3 +12,7 @@ permissions:
     default: op
   voidsweep.command.reload:
     default: op
+  voidsweep.command.autoclean.on:
+    default: op
+  voidsweep.command.autoclean.off:
+    default: op

@@ -78,6 +78,22 @@ public class CommandHANDLER implements CommandExecutor {
                     return true;
                 }
 
+            case "help":
+                if (!player.hasPermission("voidsweep.command.help")) {
+                    player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
+                    return true;
+                }
+
+                if (args[0].equalsIgnoreCase("help")) {
+                    sender.sendMessage(ChatColor.GOLD + "=== VoidSweep Help ===");
+                    sender.sendMessage(ChatColor.YELLOW + "/vs clear" + ChatColor.WHITE + " - Clean items manually.");
+                    sender.sendMessage(ChatColor.YELLOW + "/vs reload" + ChatColor.WHITE + " - Reload configuration.");
+                    sender.sendMessage(ChatColor.YELLOW + "/vs toggle" + ChatColor.WHITE + " - Enable/disable auto-cleaning.");
+                    sender.sendMessage(ChatColor.YELLOW + "/vs help" + ChatColor.WHITE + " - Show this message.");
+                    sender.sendMessage(ChatColor.GOLD + "===============");
+                    return true;
+                }
+
             default:
                 player.sendMessage(ChatColor.RED + "Unknown subcommand. Usage: /vs <clear|reload|on|off>.");
                 break;

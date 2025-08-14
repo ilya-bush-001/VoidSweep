@@ -6,7 +6,7 @@ authors: [Ilya Bush]
 description: A flexible plugin to keep your server clean.
 commands:
   vs:
-    usage: /vs clear
+    usage: /vs <subcommand>
 permissions:
   voidsweep.command.clear:
     default: op

@@ -1,0 +1,6 @@
+name: VoidSweep
+version: '${version}'
+main: net.voidsweep.VoidSweep
+api-version: '1.16'
+authors: [Ilya Bush]
+description: A flexible plugin to keep your server clean.

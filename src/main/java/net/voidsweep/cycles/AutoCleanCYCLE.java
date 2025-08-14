@@ -6,7 +6,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 
 public class AutoCleanCYCLE {
-    public void autoCleanCYCLE() {
+    public int autoCleanCYCLE() {
         int removed = 0;
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
@@ -17,5 +17,6 @@ public class AutoCleanCYCLE {
             }
         }
         Bukkit.broadcastMessage("§e" + removed + " §aitems have been cleaned.");
+        return removed;
     }
 }

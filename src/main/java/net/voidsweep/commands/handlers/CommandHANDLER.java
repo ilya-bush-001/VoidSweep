@@ -1,5 +1,6 @@
 package net.voidsweep.commands.handlers;
 
+import net.voidsweep.VoidSweep;
 import net.voidsweep.cycles.AutoCleanCYCLE;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,9 +13,11 @@ import org.jetbrains.annotations.NotNull;
 public class CommandHANDLER implements CommandExecutor {
 
     private final AutoCleanCYCLE cleaner;
+    private final VoidSweep plugin;
 
-    public CommandHANDLER(AutoCleanCYCLE cleaner) {
+    public CommandHANDLER(AutoCleanCYCLE cleaner, VoidSweep sweep) {
         this.cleaner = cleaner;
+        this.plugin = sweep;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class CommandHANDLER implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
                     return true;
                 }
-                int removed = cleaner.autoCleanCYCLE();
+                int removed = cleaner.autoCleanCYCLE(false);
                 player.sendMessage(ChatColor.GREEN + String.valueOf(removed) + " items were cleaned manually.");
                 break;
 
@@ -46,11 +49,12 @@ public class CommandHANDLER implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
                     return true;
                 }
-                player.sendMessage(ChatColor.GREEN + "Unknown subcommand. Try: clear or reload.");
+                plugin.reloadConfig();
+                player.sendMessage(ChatColor.GREEN + "The plugin has been successfully reloaded!");
                 break;
 
             default:
-                player.sendMessage(ChatColor.RED + "Unknown subcommand. Try: </vs clear> or </vs reload>.");
+                player.sendMessage(ChatColor.RED + "Unknown subcommand.");
                 break;
         }
         return true;

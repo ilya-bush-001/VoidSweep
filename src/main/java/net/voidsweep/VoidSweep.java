@@ -1,6 +1,7 @@
 package net.voidsweep;
 
 import net.voidsweep.commands.AutoCleanCOMMAND;
+import net.voidsweep.commands.handlers.CommandHANDLER;
 import net.voidsweep.cycles.AutoCleanCYCLE;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,12 +11,15 @@ public final class VoidSweep extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         AutoCleanCYCLE cleaner = new AutoCleanCYCLE();
-        getServer().getScheduler().runTaskTimer(this, cleaner::autoCleanCYCLE, 0L, 12000L);
+        Objects.requireNonNull(getCommand("vs")).setExecutor(new CommandHANDLER(cleaner, this));
+
+        getServer().getScheduler().runTaskTimer(this, () -> cleaner.autoCleanCYCLE(true), 200L, 12000L);
+
+        reloadConfig();
 
         getLogger().info("VoidSweep has been started!");
-
-        Objects.requireNonNull(getCommand("vs")).setExecutor(new AutoCleanCOMMAND(cleaner));
 
     }
 
@@ -23,5 +27,6 @@ public final class VoidSweep extends JavaPlugin {
     public void onDisable() {
 
         getLogger().info("VoidSweep has been stoped!");
+
     }
 }

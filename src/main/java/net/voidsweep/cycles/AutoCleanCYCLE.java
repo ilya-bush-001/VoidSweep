@@ -7,7 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 
 public class AutoCleanCYCLE {
-    public int autoCleanCYCLE() {
+    public int autoCleanCYCLE(boolean broadcast) {
         int removed = 0;
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
@@ -17,7 +17,9 @@ public class AutoCleanCYCLE {
                 }
             }
         }
-        Bukkit.broadcastMessage(ChatColor.YELLOW + String.valueOf(removed) + ChatColor.GREEN + " items have been cleaned.");
+        if (broadcast) {
+            Bukkit.broadcastMessage(ChatColor.YELLOW + String.valueOf(removed) + ChatColor.GREEN + " items have been cleaned.");
+        }
         return removed;
     }
 }

@@ -25,7 +25,7 @@ public class AutoCleanCOMMAND implements CommandExecutor {
                 return true;
             }
 
-            int removed = cleaner.autoCleanCYCLE();
+            int removed = cleaner.autoCleanCYCLE(true);
             sender.sendMessage(ChatColor.GREEN + String.valueOf(removed) + " items were cleaned manually.");
         } else {
             sender.sendMessage(ChatColor.RED + "Only players can use this command!");

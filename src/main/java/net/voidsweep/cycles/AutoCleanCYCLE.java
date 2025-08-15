@@ -46,7 +46,7 @@ public class AutoCleanCYCLE {
     }
 
     public void warnings(JavaPlugin plugin) {
-        int[] seconds = {120, 10, 5, 4, 3, 2, 1};
+        int[] seconds = {120, 60, 10, 5, 4, 3, 2, 1};
 
         for (int sec : seconds) {
             long delay = (120 - sec) * 20L;

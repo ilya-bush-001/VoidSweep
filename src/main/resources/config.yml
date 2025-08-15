@@ -1,4 +1,31 @@
+# config.yml | Plugin settings
+
+
+# ---------------------------------------------------------------------------------------
+auto-cleaning-delay: 12000 # Delay in auto-cleaning in ticks | # 12000 ticks = 10 minutes
+# ---------------------------------------------------------------------------------------
+
+
+# --------------------------------
+# Warn message about auto-cleaning
+warnings-messages:
+  warning-1: 2400 # 2 minutes
+  warning-2: 1200 # 1 minute
+  warning-3: 2200 # 10 seconds
+  warning-4: 2300 # 5 seconds
+  warning-5: 2320 # 4 seconds
+  warning-6: 2340 # 3 seconds
+  warning-7: 2360 # 2 seconds
+  warning-8: 2380 # 1 second
+# --------------------------------
+
+
+# -------------------------------------------------------------------------
+# A whitelist of items that will not be cleaned during any type of cleaning.
 whitelist:
   - DIAMOND
   - NETHER_STAR
   - TOTEM_OF_UNDYING
+
+whitelist-on: false # Will the whitelist be enabled | Default: false
+# -------------------------------------------------------------------------

@@ -1,0 +1,24 @@
+# messages.yml | Plugin messages
+
+messages:
+  commands:
+    errors:
+      no-permission: "[✘] You don't have permissions!"
+      not-player: "[✘] Only players can use this command!"
+      usage: "[✘] Unknown command. Usage: /vs help for help."
+    successfully:
+      reloaded: "[✔] The plugin has been successfully reloaded!"
+      auto-clean-modes:
+        on: "[✔] Auto-cleaning has been enabled!"
+        off: "[✔] Auto-cleaning has been disabled!"
+      cleaned-manually: "[✔] You have successfully cleaned up {count} pieces of trash!"
+    warnings:
+      warning-1: "Attention! All trash from the server will be cleared in 2 minutes!"
+      warning-2: "Attention! All trash from the server will be cleared in 1 minute!"
+      warning-3: "Attention! All trash from the server will be cleared in 10 seconds!"
+      warning-4: "Attention! All trash from the server will be cleared in 5 seconds!"
+      warning-5: "Attention! All trash from the server will be cleared in 4 seconds!"
+      warning-6: "Attention! All trash from the server will be cleared in 3 seconds!"
+      warning-7: "Attention! All trash from the server will be cleared in 2 seconds!"
+      warning-8: "Attention! All trash from the server will be cleared in 1 second!"
+      successfully-cleared: "[✔] Successfully cleared {count} dropped items!"

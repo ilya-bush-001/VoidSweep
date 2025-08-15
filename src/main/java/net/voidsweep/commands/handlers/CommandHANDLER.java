@@ -15,9 +15,9 @@ public class CommandHANDLER implements CommandExecutor {
     private final AutoCleanCYCLE cleaner;
     private final VoidSweep plugin;
 
-    public CommandHANDLER(AutoCleanCYCLE cleaner, VoidSweep sweep) {
+    public CommandHANDLER(AutoCleanCYCLE cleaner, VoidSweep plugin) {
         this.cleaner = cleaner;
-        this.plugin = sweep;
+        this.plugin = plugin;
     }
 
     @Override
@@ -28,11 +28,6 @@ public class CommandHANDLER implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /vs clear|reload");
-            return true;
-        }
 
         switch (args[0].toLowerCase()) {
             case "clear":
